@@ -11,8 +11,12 @@ public class Cliente {
     static Scanner scan = new Scanner(System.in);
 
     static ILeilao servidorLeilao = null;
+    
+    static Tela tela;
 
     public static void main(String args[]) {
+        tela = new Tela();
+        tela.setVisible(true);
         try {
             servidorLeilao = (ILeilao) Naming.lookup("rmi://localhost/Leilao");
             
