@@ -10,3 +10,4 @@ public interface ILeilao extends Remote {
 	String ConsultarLeilao() throws RemoteException;
 
 }
+
