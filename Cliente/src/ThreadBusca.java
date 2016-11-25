@@ -15,14 +15,9 @@ public class ThreadBusca extends Thread {
             while (true) {
                 
                 String[] leiloes = leilao.ConsultarLeilao();
-                 for(String str : leiloes){
-                    System.out.println(str);
-                
-                }
-                System.out.println("______________________");
                 System.out.println(leiloes.length);
-                if(leiloes.length > 0){
-               
+                if(leiloes.length > 1){
+                    System.out.println(leiloes[1]);
                 String[] sample = leiloes[1].split(" ");
                 
                 if (sample.length == 5)

@@ -34,11 +34,9 @@ public class Tela extends javax.swing.JFrame {
     public void UpdateTela(String[] info) {
         tableModel.setRowCount(0);
         for (String entry : info) {
-            System.out.println("funfou");
             if (!entry.contains("vazio")) {
                 String str[] = entry.split(" ");
                 Object[] objs = {str[0], str[1], str[2], str[3], str[4]};
-                System.out.println("funfou2");
                 tableModel.addRow(objs);
             }
         }

@@ -34,6 +34,10 @@ public class Servidor extends UnicastRemoteObject implements ILeilao{
     public static void main(String args[]) {
 	leiloes = new ArrayList<String>();
 	leiloes.add("vazio");
+
+	TimeCounter timeCounter = new TimeCounter();
+	timeCounter.start();
+
         try {
             Servidor servidor = new Servidor();
             Naming.rebind("rmi://localhost/Leilao", servidor);
