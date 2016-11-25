@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ThreadBusca extends Thread {
 
@@ -20,6 +21,18 @@ public class ThreadBusca extends Thread {
                     String[] sample = leiloes[1].split(" ");
 
                     if (sample.length == 5) {
+                        for(int i = 1; i<leiloes.length; i++){
+                        
+                        String leilaoPartido[] = leiloes[i].split(" ");
+                        if(Integer.parseInt(leilaoPartido[4]) == 0){
+                            int code = Integer.parseInt(leilaoPartido[0]);
+                            String vencedor = leilao.getVencedor(code);
+                            JOptionPane.showMessageDialog(null, vencedor);
+                        }
+                            
+                            
+                        }
+                        
                         tela.UpdateTela(leiloes);
                     }
 

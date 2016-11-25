@@ -11,14 +11,14 @@ public class Tela extends javax.swing.JFrame {
     ILeilao leilao;
 
     String leiloeiro;
-    
+
     String nome;
     String valor;
     String tempo;
-    
+
     int codeProdutoLance;
     double valorLance;
-    
+
     boolean lanceBool = false;
     boolean newProduct = false;
     ArrayList<String> updated;
@@ -44,40 +44,40 @@ public class Tela extends javax.swing.JFrame {
         for (String entry : info) {
             if (!entry.contains("vazio")) {
                 String str[] = entry.split(" ");
-                Object[] objs = {str[0], str[1], str[2], str[3], str[4]};
-                tableModel.addRow(objs);
+                if (Integer.parseInt(str[4]) >= 0) {
+                    Object[] objs = {str[0], str[1], str[2], str[3], str[4]};
+                    tableModel.addRow(objs);
+                }
             }
         }
     }
-    
+
     private class EnviarListener implements ActionListener {
 
         public void actionPerformed(ActionEvent arg0) {
             InputLeilao option = new InputLeilao(Tela.this);
             try {
-                if(newProduct){
-                leilao.CadastrarLeilao(leiloeiro + " " + nome + " " + valor + " " + tempo);
-                newProduct = false;
+                if (newProduct) {
+                    leilao.CadastrarLeilao(leiloeiro + " " + nome + " " + valor + " " + tempo);
+                    newProduct = false;
                 }
             } catch (Exception ex) {
             }
         }
     }
 
-    
-        private class DarLance implements ActionListener {
+    private class DarLance implements ActionListener {
 
         public void actionPerformed(ActionEvent arg0) {
             InputLance option = new InputLance(Tela.this);
             try {
-                if(lanceBool){
-                    boolean lancado = leilao.DarLance(codeProdutoLance,leiloeiro,valorLance);
+                if (lanceBool) {
+                    boolean lancado = leilao.DarLance(codeProdutoLance, leiloeiro, valorLance);
                     lanceBool = false;
-                    
-                    if(lancado){
+
+                    if (lancado) {
                         JOptionPane.showMessageDialog(null, "Lance efetuado com sucesso!");
-                    }
-                    else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Lance invalido!");
                     }
                 }
@@ -85,6 +85,7 @@ public class Tela extends javax.swing.JFrame {
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

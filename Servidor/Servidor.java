@@ -44,13 +44,36 @@ public class Servidor extends UnicastRemoteObject implements ILeilao{
 		}
 
 		if(lancado){
-			lances.add(code + " " + user + " " + value);
+			lances.add(code + " " + user+ " " + str[2] + " " + value);
 			leiloes.set(code,str[0] + " " + str[1] + " " + str[2] + " " + value + " " + str[4] );
 		}
 	}
 
 	return lancado;
 
+    }
+
+    public String getVencedor(int code){
+	String retorno = "";
+	String produtoPartido[] = leiloes.get(code).split(" ");
+	
+	for(String lance : lances){
+		String lancePartido[] = lance.split(" ");
+	 	if(lancePartido.length == 4){
+		System.out.println("JOSUEEEEE" + produtoPartido[3]);
+		if(Integer.parseInt(lancePartido[0]) == code){
+			if(Double.parseDouble(produtoPartido[3]) == Double.parseDouble(lancePartido[3])){
+
+				retorno =  "Vencedor: " + lancePartido[1] + " Produto: " + 	produtoPartido[2] + " Valor: " + produtoPartido[3];		
+			}
+			
+		}
+		}
+
+	}
+
+	System.out.println(retorno);
+	return retorno;
     }
 	
 

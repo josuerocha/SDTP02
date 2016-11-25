@@ -11,6 +11,8 @@ public interface ILeilao extends Remote {
 	String[] ConsultarLeilao() throws RemoteException;
         
         boolean DarLance(int code, String user , double value) throws RemoteException;
+        
+        String getVencedor(int code) throws RemoteException;
 
 }
 
