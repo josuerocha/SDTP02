@@ -11,9 +11,16 @@ public class Tela extends javax.swing.JFrame {
     ILeilao leilao;
 
     String leiloeiro;
+    
     String nome;
     String valor;
     String tempo;
+    
+    int codeProdutoLance;
+    double valorLance;
+    
+    boolean lanceBool = false;
+    boolean newProduct = false;
     ArrayList<String> updated;
 
     DefaultTableModel tableModel;
@@ -23,6 +30,7 @@ public class Tela extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.BLACK);
         leiloeiro = JOptionPane.showInputDialog("Qual o seu nome?", "Digite seu nome aqui.");
         jButton2.addActionListener(new EnviarListener());
+        jButton1.addActionListener(new DarLance());
 
         this.leilao = leilao;
 
@@ -45,14 +53,38 @@ public class Tela extends javax.swing.JFrame {
     private class EnviarListener implements ActionListener {
 
         public void actionPerformed(ActionEvent arg0) {
-            JOptionPaneMultiInput option = new JOptionPaneMultiInput(Tela.this);
+            InputLeilao option = new InputLeilao(Tela.this);
             try {
+                if(newProduct){
                 leilao.CadastrarLeilao(leiloeiro + " " + nome + " " + valor + " " + tempo);
+                newProduct = false;
+                }
             } catch (Exception ex) {
             }
         }
     }
 
+    
+        private class DarLance implements ActionListener {
+
+        public void actionPerformed(ActionEvent arg0) {
+            InputLance option = new InputLance(Tela.this);
+            try {
+                if(lanceBool){
+                    boolean lancado = leilao.DarLance(codeProdutoLance,leiloeiro,valorLance);
+                    lanceBool = false;
+                    
+                    if(lancado){
+                        JOptionPane.showMessageDialog(null, "Lance efetuado com sucesso!");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Lance invalido!");
+                    }
+                }
+            } catch (Exception ex) {
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

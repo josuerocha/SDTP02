@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class ThreadBusca extends Thread {
@@ -13,18 +14,16 @@ public class ThreadBusca extends Thread {
     public void run() {
         try {
             while (true) {
-                
+
                 String[] leiloes = leilao.ConsultarLeilao();
-                System.out.println(leiloes.length);
-                if(leiloes.length > 1){
-                    System.out.println(leiloes[1]);
-                String[] sample = leiloes[1].split(" ");
-                
-                if (sample.length == 5)
-                tela.UpdateTela(leiloes);
-                
+                if (leiloes.length > 1) {
+                    String[] sample = leiloes[1].split(" ");
+
+                    if (sample.length == 5) {
+                        tela.UpdateTela(leiloes);
+                    }
+
                 }
-                
                 sleep(500);
             }
 
