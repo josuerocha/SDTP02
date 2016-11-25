@@ -14,6 +14,9 @@ public interface ILeilao extends Remote {
         
         String getVencedor(int code) throws RemoteException;
 
+        boolean FinishLeilao(int code, String dono) throws RemoteException;
+
+
 }
 
 

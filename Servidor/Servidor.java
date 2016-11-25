@@ -53,6 +53,25 @@ public class Servidor extends UnicastRemoteObject implements ILeilao{
 
     }
 
+    public boolean FinishLeilao(int code, String dono){
+	boolean resultado = true;
+
+	if(code <= leiloes.size()){
+		String str[] = leiloes.get(code).split(" ");
+		if(dono.contains(str[1])){
+			leiloes.set(code,str[0] + " " + str[1] + " " + str[2] + " " + str[3] + " " + "1" );
+		}
+		else{
+			resultado = false;	
+		}	
+	}
+	else{
+		resultado = false;	
+	}	
+	return resultado;
+    }
+
+
     public String getVencedor(int code){
 	String retorno = "";
 	String produtoPartido[] = leiloes.get(code).split(" ");
@@ -60,7 +79,7 @@ public class Servidor extends UnicastRemoteObject implements ILeilao{
 	for(String lance : lances){
 		String lancePartido[] = lance.split(" ");
 	 	if(lancePartido.length == 4){
-		System.out.println("JOSUEEEEE" + produtoPartido[3]);
+		//System.out.println("JOSUEEEEE" + produtoPartido[3]);
 		if(Integer.parseInt(lancePartido[0]) == code){
 			if(Double.parseDouble(produtoPartido[3]) == Double.parseDouble(lancePartido[3])){
 
