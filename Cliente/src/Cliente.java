@@ -23,13 +23,12 @@ public class Cliente {
         try {
             
             servidorLeilao = (ILeilao) Naming.lookup("rmi://localhost/Leilao");
-            busca = new ThreadBusca(tela,servidorLeilao);
             
             tela = new Tela(servidorLeilao);
             tela.setVisible(true);
-        
+            
+            busca = new ThreadBusca(tela,servidorLeilao);
             busca.start();
-
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             e.printStackTrace();

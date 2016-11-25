@@ -3,50 +3,58 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Tela extends javax.swing.JFrame {
-    
+
     ILeilao leilao;
-    
+
+    String leiloeiro;
     String nome;
     String valor;
     String tempo;
-    
+    ArrayList<String> updated;
+
     DefaultTableModel tableModel;
-    
+
     public Tela(ILeilao leilao) {
         initComponents();
         this.getContentPane().setBackground(Color.BLACK);
-        
+        leiloeiro = JOptionPane.showInputDialog("Qual o seu nome?", "Digite seu nome aqui.");
         jButton2.addActionListener(new EnviarListener());
-        
+
         this.leilao = leilao;
-        
-        String col[] = {"Código","Leiloeiro","Produto","Preço", "Tempo restante"};
+
+        String col[] = {"Código", "Leiloeiro", "Produto", "Preço", "Tempo restante"};
         tableModel = new DefaultTableModel(col, 0);
         jTable1.setModel(tableModel);
     }
 
-    public void UpdateTela(ArrayList<String> info){
-        for(String entry : info){
-            String str[] = entry.split(" ");
-            Object[] objs = {str[0],str[1],str[2],str[3]};
-            tableModel.addRow(objs);
+    public void UpdateTela(String[] info) {
+        tableModel.setRowCount(0);
+        for (String entry : info) {
+            System.out.println("funfou");
+            if (!entry.contains("vazio")) {
+                String str[] = entry.split(" ");
+                Object[] objs = {str[0], str[1], str[2], str[3], str[4]};
+                System.out.println("funfou2");
+                tableModel.addRow(objs);
+            }
         }
     }
     
     private class EnviarListener implements ActionListener {
 
-		public void actionPerformed(ActionEvent arg0) {
-                    JOptionPaneMultiInput option = new JOptionPaneMultiInput(Tela.this);
-                    try{
-                        leilao.CadastrarLeilao(nome + " " + valor + " " + tempo);
-                    }
-                        catch(Exception ex){
-                    }
-		}
-	}
+        public void actionPerformed(ActionEvent arg0) {
+            JOptionPaneMultiInput option = new JOptionPaneMultiInput(Tela.this);
+            try {
+                leilao.CadastrarLeilao(leiloeiro + " " + nome + " " + valor + " " + tempo);
+            } catch (Exception ex) {
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

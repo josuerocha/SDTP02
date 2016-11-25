@@ -7,31 +7,33 @@ import java.util.ArrayList;
 
 public class Servidor extends UnicastRemoteObject implements ILeilao{
 
-    static ArrayList<String> leiloes = new ArrayList<String>();
+    static ArrayList <String> leiloes;
 
+    int codAtual = 1;
 
     public Servidor() throws RemoteException {
         super();
     }
 
     public boolean CadastrarLeilao(String entrada){
+	entrada = codAtual + " " + entrada;
         leiloes.add(entrada);
+	codAtual++;
 	System.out.println("Cadastro feito");
         return true;
     };
 
-    public ArrayList<String> ConsultarLeilao() {
-	if(leiloes.size() == 0){
-        	System.out.println("Consulta realizada!");
-        	leiloes.add("Empty");
-		System.out.println("chato " + leiloes.size());
-	}
-	return leiloes;
+    public String[] ConsultarLeilao() {
+	String[] stockArr = new String[leiloes.size()];
+	stockArr = leiloes.toArray(stockArr);
+
+	return stockArr;
     }
 	
 
     public static void main(String args[]) {
-
+	leiloes = new ArrayList<String>();
+	leiloes.add("vazio");
         try {
             Servidor servidor = new Servidor();
             Naming.rebind("rmi://localhost/Leilao", servidor);

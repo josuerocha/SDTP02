@@ -13,14 +13,28 @@ public class ThreadBusca extends Thread {
     public void run() {
         try {
             while (true) {
-                System.out.println("Conslutando");
-                tela.UpdateTela(leilao.ConsultarLeilao());
                 
+                String[] leiloes = leilao.ConsultarLeilao();
+                 for(String str : leiloes){
+                    System.out.println(str);
+                
+                }
+                System.out.println("______________________");
+                System.out.println(leiloes.length);
+                if(leiloes.length > 0){
+               
+                String[] sample = leiloes[1].split(" ");
+                
+                if (sample.length == 5)
+                tela.UpdateTela(leiloes);
+                
+                }
+                
+                sleep(500);
             }
 
-        } catch (Exception ex) {
-            System.out.println(ex);
-            System.out.println("Exceção man");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
